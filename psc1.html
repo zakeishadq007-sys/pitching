@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petite Swap Club Prototype</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Mengunci rasio layar seperti iPhone 14 di Figma (390 x 844) */
+        .phone-container {
+            width: 390px;
+            height: 844px;
+            font-family: 'Inter', sans-serif;
+        }
+        /* Menyembunyikan scrollbar bawaan */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Palet Warna Kustom Petite Swap Club */
+        :root {
+            --primary: #6D2E46;
+            --primary-light: #EEE0E5;
+            --accent: #C4687A;
+            --blush: #E8A5B0;
+            --bg: #FAF5F5;
+        }
+        .bg-primary { background-color: var(--primary); }
+        .text-primary { color: var(--primary); }
+        .border-primary { border-color: var(--primary); }
+        .bg-accent { background-color: var(--accent); }
+        .text-accent { color: var(--accent); }
+        .bg-custom-pink { background-color: var(--bg); }
+    </style>
+</head>
+<body class="bg-gray-900 flex justify-center items-center min-h-screen">
+
+    <div class="phone-container bg-[#FAF5F5] relative flex flex-col justify-between overflow-hidden shadow-2xl rounded-[40px] border-[8px] border-gray-800">
+        
+        <header id="main-header" class="bg-primary text-white px-4 pt-6 pb-3 flex justify-between items-center z-10">
+            <span class="font-serif text-lg font-bold tracking-wide">Petite Swap Club</span>
+            <div class="flex gap-3 text-white/90">
+                <i data-lucide="search" class="w-5 h-5 cursor-pointer"></i>
+                <i data-lucide="bell" class="w-5 h-5 cursor-pointer"></i>
+                <i data-lucide="shopping-bag" class="w-5 h-5 cursor-pointer"></i>
+            </div>
+        </header>
+
+        <main class="flex-1 overflow-y-auto no-scrollbar pb-20">
+
+            <div id="screen-home" class="screen-content p-4">
+                <div class="bg-white p-4 rounded-2xl shadow-sm border border-pink-100 mb-4">
+                    <h3 class="text-gray-800 font-medium text-base">Hi, keii!!👋</h3>
+                    <p class="text-xs text-gray-500 mb-2">Temukan outfit yang pas, tanpa khawatir ukuran petitemu!.</p>
+                    <div class="inline-flex items-center gap-1.5 bg-[#6D2E46] text-white text-[11px] px-2.5 py-1 rounded-full font-medium">
+                        <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> FitPass Aktif &bull; XS-P &bull; 152 cm
+                    </div>
+                </div>
+
+                <div class="flex gap-2 overflow-x-auto no-scrollbar mb-4 py-1">
+                    <span class="bg-primary text-white text-xs px-3 py-1.5 rounded-full whitespace-nowrap cursor-pointer">Semua</span>
+                    <span class="bg-white text-gray-600 border border-gray-200 text-xs px-3 py-1.5 rounded-full whitespace-nowrap cursor-pointer">Swap</span>
+                    <span class="bg-white text-gray-600 border border-gray-200 text-xs px-3 py-1.5 rounded-full whitespace-nowrap cursor-pointer">Sewa</span>
+                    <span class="bg-white text-gray-600 border border-gray-200 text-xs px-3 py-1.5 rounded-full whitespace-nowrap cursor-pointer">Jual</span>
+                </div>
+
+                <div class="flex justify-between items-center mb-3">
+                    <h4 class="font-semibold text-gray-800 text-sm">Cocok buat kamu</h4>
+                    <span class="text-xs text-accent font-medium cursor-pointer">Lihat semua</span>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3 mb-5">
+                    <div onclick="switchScreen('screen-detail')" class="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 cursor-pointer transition transform active:scale-95">
+                        <div class="h-36 bg-[#F0E6EA] relative flex items-center justify-center">
+                            <span class="text-gray-400 text-sm">Blouse Linen Putih</span>
+                            <span class="absolute top-2 left-2 bg-[#C4687A] text-white text-[9px] px-2 py-0.5 rounded font-medium">Swap</span>
+                            <span class="absolute top-2 right-2 bg-emerald-600 text-white p-1 rounded-full"><i data-lucide="sparkles" class="w-3 h-3"></i></span>
+                        </div>
+                        <div class="p-2.5">
+                            <h5 class="font-medium text-xs text-gray-800 truncate">Blouse Linen Putih</h5>
+                            <p class="text-[10px] text-gray-400">XS · P · 150–155 cm</p>
+                            <p class="text-xs font-semibold text-primary mt-1">Swap / Rp 0</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100">
+                        <div class="h-36 bg-[#EBE4E6] relative flex items-center justify-center">
+                            <span class="text-gray-400 text-sm">Midi Dress Navy</span>
+                            <span class="absolute top-2 left-2 bg-indigo-600 text-white text-[9px] px-2 py-0.5 rounded font-medium">Sewa</span>
+                        </div>
+                        <div class="p-2.5">
+                            <h5 class="font-medium text-xs text-gray-800 truncate">Midi Dress Navy</h5>
+                            <p class="text-[10px] text-gray-400">S · P · 150–157 cm</p>
+                            <p class="text-xs font-semibold text-primary mt-1">Rp 45k/hari</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-r from-[#6D2E46] to-[#C4687A] text-white p-3.5 rounded-xl flex items-center justify-between shadow-sm">
+                    <div>
+                        <h5 class="text-xs font-semibold flex items-center gap-1"><i data-lucide="shield-alert" class="w-3.5 h-3.5"></i> Fit Guarantee Aktif</h5>
+                        <p class="text-[10px] text-white/80 mt-0.5">Tidak pas sesuai FitPass? Do Refund.</p>
+                    </div>
+                    <i data-lucide="chevron-right" class="w-4 h-4 text-white/70"></i>
+                </div>
+            </div>
+
+            <div id="screen-detail" class="screen-content p-4 hidden">
+                <button onclick="switchScreen('screen-home')" class="mb-3 flex items-center gap-1 text-xs text-primary font-medium">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Kembali
+                </button>
+                <div class="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm">
+                    <div class="h-64 bg-[#F2EBEE] relative flex flex-col justify-between p-3">
+                        <div class="flex justify-between items-center w-full">
+                            <span class="bg-[#C4687A] text-white text-xs px-2.5 py-0.5 rounded-full font-medium">Swap</span>
+                            <span class="bg-primary text-white text-[10px] px-2 py-1 rounded-md flex items-center gap-1"><i data-lucide="shield" class="w-3 h-3"></i> Fit Guarantee</span>
+                        </div>
+                        <div class="self-center text-gray-400 text-sm">👗 Gambar Midi Dress Floral</div>
+                        <div class="flex justify-center gap-1 w-full">
+                            <span class="w-3 h-1 bg-primary rounded-full"></span>
+                            <span class="w-1.5 h-1 bg-gray-300 rounded-full"></span>
+                            <span class="w-1.5 h-1 bg-gray-300 rounded-full"></span>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-base font-bold text-gray-800">Midi Dress Floral</h3>
+                                <p class="text-xs text-gray-400">Brand Lokal &bull; Kondisi 9/10</p>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-sm font-bold text-primary block">Swap</span>
+                                <span class="text-[11px] text-gray-400">atau Rp 55.000</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-emerald-50 border border-emerald-200 text-emerald-800 p-2.5 rounded-xl my-4 flex items-center gap-2">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-emerald-600 flex-shrink-0"></i>
+                            <span class="text-[11px] font-medium">Cocok dengan FitPass kamu! XS · P &bull; Ideal untuk 148–156 cm</span>
+                        </div>
+
+                        <div class="flex items-center justify-between border-t border-b border-gray-100 py-3 my-3">
+                            <div class="flex items-center gap-2">
+                                <div class="w-8 h-8 rounded-full bg-pink-200 flex items-center justify-center text-xs font-bold text-primary">A</div>
+                                <div>
+                                    <h5 class="text-xs font-semibold text-gray-700">@aza.daguisé</h5>
+                                    <p class="text-[10px] text-gray-400">⭐️ 4.9 &bull; 23 Transaksi</p>
+                                </div>
+                            </div>
+                            <button class="text-xs border border-gray-300 px-3 py-1 rounded-lg text-gray-600">Chat</button>
+                        </div>
+
+                        <div class="flex gap-2 mt-4">
+                            <button onclick="switchScreen('screen-swap-request')" class="flex-1 bg-primary text-white text-xs font-semibold py-3 rounded-xl transition active:scale-95">Ajukan Swap</button>
+                            <button class="flex-1 border border-primary text-primary text-xs font-semibold py-3 rounded-xl">Sewa / Beli</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="screen-swap-request" class="screen-content p-4 hidden">
+                <button onclick="switchScreen('screen-detail')" class="mb-3 flex items-center gap-1 text-xs text-primary font-medium">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Kembali
+                </button>
+                
+                <div class="flex justify-between items-center bg-white p-3 rounded-xl border border-gray-100 mb-4 text-center">
+                    <div class="flex-1 text-xs font-semibold text-primary border-b-2 border-primary pb-1">1. Pilih Item</div>
+                    <div class="flex-1 text-xs font-medium text-gray-400 border-b-2 border-gray-100 pb-1">2. Tawarkan</div>
+                    <div class="flex-1 text-xs font-medium text-gray-400 border-b-2 border-gray-100 pb-1">3. Konfirmasi</div>
+                </div>
+
+                <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Item Yang Kamu Inginkan</h4>
+                <div class="bg-white p-3 rounded-xl border border-gray-100 flex gap-3 mb-4">
+                    <div class="w-16 h-16 bg-pink-100 rounded-lg flex items-center justify-center text-xs">👗</div>
+                    <div>
+                        <h5 class="text-xs font-bold text-gray-800">Midi Dress Floral</h5>
+                        <p class="text-[10px] text-gray-400">@aza.daguisé &bull; XS &bull; P</p>
+                        <span class="inline-flex text-[9px] bg-primary/10 text-primary px-1.5 py-0.5 rounded mt-1"><i data-lucide="shield" class="w-2.5 h-2.5 mr-0.5"></i> Fit Guarantee</span>
+                    </div>
+                </div>
+
+                <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Tawarkan Item Milikmu</h4>
+                <div class="border-2 border-dashed border-gray-300 bg-white rounded-xl p-6 text-center cursor-pointer hover:bg-pink-50/50 mb-4">
+                    <i data-lucide="plus-circle" class="w-6 h-6 text-gray-400 mx-auto mb-1"></i>
+                    <p class="text-xs font-medium text-gray-600">Pilih dari lemari kamu</p>
+                    <p class="text-[10px] text-gray-400">atau tambah item baru</p>
+                </div>
+
+                <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Pesan Untuk Pemilik (Opsional)</h4>
+                <textarea class="w-full border border-gray-200 rounded-xl p-3 text-xs bg-white focus:outline-none focus:border-primary mb-4" rows="3" placeholder="Tulis pesan kesepakatan swap..."></textarea>
+
+                <div class="bg-pink-50 p-3 rounded-xl border border-pink-100 flex gap-2 mb-4">
+                    <i data-lucide="info" class="w-4 h-4 text-accent flex-shrink-0 mt-0.5"></i>
+                    <p class="text-[10px] text-gray-600">Transaksi dilindungi <b>Fit Guarantee</b>. Jika pakaian tidak cocok dengan profil FitPass-mu, kamu berhak mengajukan pengembalian penuh.</p>
+                </div>
+
+                <button onclick="alert('Permintaan Swap Berhasil Dikirim! 🎉'); switchScreen('screen-home');" class="w-full bg-primary text-white text-xs font-semibold py-3 rounded-xl shadow-md">Kirim Permintaan Swap</button>
+            </div>
+
+            <div id="screen-fitpass" class="screen-content p-4 hidden">
+                <div class="flex flex-col items-center text-center mt-2 mb-5">
+                    <div class="w-16 h-16 rounded-full bg-primary text-white font-bold text-xl flex items-center justify-center shadow-md mb-2">ZDQ</div>
+                    <h3 class="text-base font-bold text-gray-800 flex items-center gap-1">Zakeisha DQ <i data-lucide="badge-check" class="w-4 h-4 text-primary fill-white"></i></h3>
+                    <p class="text-[11px] text-gray-400">Member sejak Mei 2026</p>
+                    
+                    <div class="grid grid-cols-3 gap-6 bg-white w-full py-3 px-4 rounded-xl shadow-sm border border-gray-100 mt-4">
+                        <div><p class="text-xs font-bold text-primary">12</p><p class="text-[10px] text-gray-400">Transaksi</p></div>
+                        <div><p class="text-xs font-bold text-primary">⭐️ 4.9</p><p class="text-[10px] text-gray-400">Rating</p></div>
+                        <div><p class="text-xs font-bold text-primary">8</p><p class="text-[10px] text-gray-400">Swap</p></div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100 mb-4">
+                    <div class="flex justify-between items-center mb-3">
+                        <h4 class="text-xs font-bold text-gray-700 uppercase tracking-wide">Profil Ukuran Saya</h4>
+                        <span class="text-xs text-accent cursor-pointer font-medium">Edit</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-x-4 gap-y-2.5 text-xs border-t border-gray-50 pt-3">
+                        <div class="flex justify-between"><span class="text-gray-400">Tinggi Badan</span><span class="font-semibold text-gray-700">152 cm</span></div>
+                        <div class="flex justify-between"><span class="text-gray-400">Berat Badan</span><span class="font-semibold text-gray-700">46 kg</span></div>
+                        <div class="flex justify-between"><span class="text-gray-400">Ukuran Atasan</span><span class="font-semibold text-gray-700">XS / 32</span></div>
+                        <div class="flex justify-between"><span class="text-gray-400">Ukuran Bawahan</span><span class="font-semibold text-gray-700">XS / 25"</span></div>
+                        <div class="flex justify-between"><span class="text-gray-400">Panjang Lengan</span><span class="font-semibold text-gray-700">Pendek</span></div>
+                        <div class="flex justify-between"><span class="text-gray-400">Inseam</span><span class="font-semibold text-gray-700">26"</span></div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-3.5 rounded-xl shadow-sm border border-gray-100 flex items-center justify-between mb-3">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-pink-50 rounded-lg text-primary"><i data-lucide="sparkles" class="w-5 h-5"></i></div>
+                        <div>
+                            <h5 class="text-xs font-semibold text-gray-800">Rekomendasi Personal</h5>
+                            <p class="text-[10px] text-gray-400">12 item baru cocok profil kamu</p>
+                        </div>
+                    </div>
+                    <i data-lucide="chevron-right" class="w-4 h-4 text-gray-400"></i>
+                </div>
+
+                <div class="bg-white p-3.5 rounded-xl shadow-sm border border-gray-100 flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-emerald-50 rounded-lg text-emerald-600"><i data-lucide="leaf" class="w-5 h-5"></i></div>
+                        <div>
+                            <h5 class="text-xs font-semibold text-gray-800">Jejak Sustainability</h5>
+                            <p class="text-[10px] text-gray-400">Kamu hemat 3 pakaian baru bulan ini</p>
+                        </div>
+                    </div>
+                    <i data-lucide="chevron-right" class="w-4 h-4 text-gray-400"></i>
+                </div>
+            </div>
+
+            <div id="screen-onboarding" class="screen-content p-4 hidden">
+                <div class="text-center mt-4 mb-6">
+                    <span class="text-[10px] uppercase font-bold text-accent tracking-widest bg-pink-50 px-2 py-1 rounded">Langkah 2 / 4</span>
+                    <h3 class="text-base font-bold text-gray-800 mt-2">Ukuran Tubuh Petite-mu</h3>
+                    <p class="text-xs text-gray-400 max-w-[280px] mx-auto mt-1">Ini membantu sistem FitPass mencocokkan pakaian yang 100% pas di tubuhmu.</p>
+                </div>
+
+                <div class="bg-white p-4 rounded-xl border border-gray-100 mb-4">
+                    <label class="text-xs font-semibold text-gray-500 block mb-2 text-center">TINGGI BADAN (CM)</label>
+                    <div class="flex justify-center items-center gap-4">
+                        <button class="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center font-bold text-gray-600 active:bg-gray-100">-</button>
+                        <span class="text-xl font-bold text-primary">152</span>
+                        <button class="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center font-bold text-gray-600 active:bg-gray-100">+</button>
+                    </div>
+                </div>
+
+                <div class="bg-white p-4 rounded-xl border border-gray-100 mb-4">
+                    <label class="text-xs font-semibold text-gray-500 block mb-2">UKURAN ATASAN PREFERENSI</label>
+                    <div class="grid grid-cols-4 gap-2 text-center text-xs">
+                        <span class="p-2 border border-gray-200 rounded-lg text-gray-400">XXS</span>
+                        <span class="p-2 bg-primary text-white font-bold rounded-lg">XS</span>
+                        <span class="p-2 border border-gray-200 rounded-lg text-gray-600">S</span>
+                        <span class="p-2 border border-gray-200 rounded-lg text-gray-600">M</span>
+                    </div>
+                </div>
+
+                <div class="bg-white p-4 rounded-xl border border-gray-100 mb-5">
+                    <label class="text-xs font-semibold text-gray-500 block mb-2">UKURAN BAWAHAN (WAIST INCH)</label>
+                    <div class="flex gap-2 overflow-x-auto no-scrollbar py-1 text-xs text-center">
+                        <span class="px-4 py-2 border border-gray-200 rounded-lg text-gray-600 min-w-[50px]">23"</span>
+                        <span class="px-4 py-2 border border-gray-200 rounded-lg text-gray-600 min-w-[50px]">24"</span>
+                        <span class="px-4 py-2 bg-primary text-white font-bold rounded-lg min-w-[50px]">25"</span>
+                        <span class="px-4 py-2 border border-gray-200 rounded-lg text-gray-600 min-w-[50px]">26"</span>
+                        <span class="px-4 py-2 border border-gray-200 rounded-lg text-gray-600 min-w-[50px]">27"</span>
+                    </div>
+                </div>
+
+                <button onclick="switchScreen('screen-fitpass')" class="w-full bg-primary text-white text-xs font-semibold py-3 rounded-xl flex items-center justify-center gap-1 shadow-md">
+                    Simpan & Lihat Profil <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+            </div>
+
+        </main>
+
+        <nav class="absolute bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-2 py-2 flex justify-around items-center z-10 shadow-[0_-2px_10px_rgba(0,0,0,0.03)]">
+            <button onclick="switchScreen('screen-home')" class="nav-item text-primary flex flex-col items-center gap-0.5">
+                <i data-lucide="home" class="w-5 h-5"></i>
+                <span class="text-[10px] font-medium">Home</span>
+            </button>
+            <button onclick="switchScreen('screen-onboarding')" class="nav-item text-gray-400 flex flex-col items-center gap-0.5">
+                <i data-lucide="sparkles" class="w-5 h-5"></i>
+                <span class="text-[10px] font-medium">Onboarding</span>
+            </button>
+            <button onclick="switchScreen('screen-swap-request')" class="nav-item text-gray-400 flex flex-col items-center gap-0.5">
+                <i data-lucide="refresh-cw" class="w-5 h-5"></i>
+                <span class="text-[10px] font-medium">Swap</span>
+            </button>
+            <button onclick="switchScreen('screen-fitpass')" class="nav-item text-gray-400 flex flex-col items-center gap-0.5">
+                <i data-lucide="shield-check" class="w-5 h-5"></i>
+                <span class="text-[10px] font-medium">FitPass</span>
+            </button>
+        </nav>
+
+    </div>
+
+    <script>
+        // Inisialisasi awal ikon Lucide
+        lucide.createIcons();
+
+        function switchScreen(screenId) {
+            // Sembunyikan semua konten layar
+            document.querySelectorAll('.screen-content').forEach(screen => {
+                screen.classList.add('hidden');
+            });
+
+            // Tampilkan layar terpilih
+            document.getElementById(screenId).classList.remove('hidden');
+
+            // Modifikasi header atas secara dinamis menyesuaikan layar figma
+            const header = document.getElementById('main-header');
+            if (screenId === 'screen-detail' || screenId === 'screen-swap-request') {
+                header.classList.add('hidden'); // Sembunyikan top navbar jika di detail / flow request
+            } else {
+                header.classList.remove('hidden');
+            }
+
+            // Update status keaktifan warna di bottom navigation bar
+            updateNavBarColors(screenId);
+        }
+
+        function updateNavBarColors(screenId) {
+            const navButtons = document.querySelectorAll('nav button');
+            
+            // Set warna default menjadi muted (abu-abu)
+            navButtons.forEach(btn => {
+                btn.classList.remove('text-primary');
+                btn.classList.add('text-gray-400');
+            });
+
+            // Beri warna primary (berry) untuk menu aktif sesuai layar figma target
+            if (screenId === 'screen-home') {
+                navButtons[0].classList.add('text-primary');
+            } else if (screenId === 'screen-onboarding') {
+                navButtons[1].classList.add('text-primary');
+            } else if (screenId === 'screen-swap-request') {
+                navButtons[2].classList.add('text-primary');
+            } else if (screenId === 'screen-fitpass') {
+                navButtons[3].classList.add('text-primary');
+            }
+        }
+    </script>
+</body>
+</html>

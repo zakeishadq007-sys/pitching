@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KaryaNesia - Premium Integrated Dashboard</title>
+    <!-- Menggunakan Fon Premium Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1F4E79;       /* Biru Utama - Profesional & Kokoh */
+            --primary-light: #eff6ff; /* Biru Latar Belakang */
+            --secondary: #F4A020;     /* Oranye Aksentuasi - Kreatif & Energik */
+            --secondary-hover: #db8b12;
+            --success: #10b981;       /* Hijau untuk Status Sukses */
+            --text-main: #1e293b;     /* Warna Teks Utama */
+            --text-muted: #64748b;    /* Warna Teks Sekunder */
+            --bg: #f8fafc;            /* Latar Belakang Dashboard */
+            --card-shadow: 0 10px 25px -5px rgba(31, 78, 121, 0.05), 0 8px 10px -6px rgba(31, 78, 121, 0.05);
+        }
+
+        * {
+            box-sizing: border-box;
+            transition: all 0.2s ease-in-out;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg);
+            color: var(--text-main);
+            padding-bottom: 40px;
+        }
+
+        /* NAVBAR PREMIUM */
+        .navbar {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            padding: 18px 24px;
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar h2 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .navbar h2 span {
+            color: var(--secondary);
+        }
+
+        /* TABS JAUH LEBIH ELEGAN */
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tab {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.8);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 13px;
+        }
+
+        .tab:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        .tab.active {
+            background: var(--secondary);
+            color: #fff;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(244, 160, 32, 0.3);
+        }
+
+        /* UTILITY LAYOUT */
+        .container {
+            padding: 24px;
+            max-width: 1400px;
+            margin: auto;
+        }
+
+        /* ANIMASI PERPINDAHAN TAB */
+        .tab-panel {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* KARTU DASHBOARD (CARD) */
+        .card {
+            background: #fff;
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            margin-bottom: 24px;
+        }
+
+        .card h3 {
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .card p.subtitle {
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        /* KARTU PROYEK & KARYA */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .project-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 16px;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .project-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 8px 20px rgba(31, 78, 121, 0.04);
+        }
+
+        .project-card h4 {
+            margin: 12px 0 6px 0;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .project-meta {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .project-meta div {
+            margin-bottom: 4px;
+        }
+
+        /* AREA DISPLAY PREVIEW KARYA */
+        .work-preview {
+            height: 160px;
+            background: linear-gradient(135deg, #e0e7ff, #f1f5f9);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--primary);
+            border: 1px dashed #cbd5e1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .work-preview::before {
+            content: '📄';
+            font-size: 32px;
+            margin-bottom: 4px;
+        }
+
+        /* DESAIN PROFIL PREMIUM */
+        .profile-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        @media(min-width: 992px) {
+            .profile-container {
+                grid-template-columns: 320px 1fr;
+            }
+        }
+
+        .profile-sidebar {
+            text-align: center;
+        }
+
+        .avatar-wrapper {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 16px auto;
+        }
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: var(--primary-light);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            border: 3px solid #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .badge-verified {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: var(--success);
+            color: white;
+            font-size: 11px;
+            padding: 2px 6px;
+            border-radius: 10px;
+            border: 2px solid white;
+            font-weight: 600;
+        }
+
+        .stats-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0 0 0;
+            text-align: left;
+            border-top: 1px solid #f1f5f9;
+        }
+
+        .stats-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .stats-list li span:first-child {
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .stats-list li span:last-child {
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        /* GALERI PORTOFOLIO */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 16px;
+        }
+
+        .portfolio-item {
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            background: #fff;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.05);
+        }
+
+        .portfolio-thumb {
+            height: 140px;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .portfolio-desc {
+            padding: 12px;
+        }
+
+        .portfolio-desc h5 {
+            margin: 0 0 4px 0;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .portfolio-desc span {
+            font-size: 11px;
+            color: var(--text-muted);
+            background: #f1f5f9;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        /* TOMBOL PREMIUM */
+        .btn {
+            background: var(--secondary);
+            color: #fff;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 13px;
+            width: 100%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .btn:hover {
+            background: var(--secondary-hover);
+            box-shadow: 0 4px 12px rgba(244, 160, 32, 0.2);
+        }
+
+        .btn-success {
+            background: var(--success);
+        }
+        
+        .btn-success:hover {
+            background: #059669;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+        }
+
+        /* RESPONSIVITAS DEVICE (MOBILE-FIRST) */
+        @media(min-width: 768px) {
+            .navbar {
+                flex-direction: row;
+                align-items: center;
+                padding: 16px 40px;
+            }
+            .tab {
+                font-size: 14px;
+                padding: 10px 20px;
+            }
+            .container {
+                padding: 32px 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR UTAMA -->
+    <div class="navbar">
+        <h2>Karya<span>Nesia</span></h2>
+        <div class="tabs">
+            <button class="tab active" onclick="openTab('klien')">Dashboard Klien</button>
+            <button class="tab" onclick="openTab('tawaran')">Tawaran Freelancer</button>
+            <button class="tab" onclick="openTab('kurasi')">Kurasi Karya</button>
+            <button class="tab" onclick="openTab('profil')">Profil & Portofolio</button>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- TAB 1: DASHBOARD KLIEN -->
+        <div id="klien" class="tab-panel active">
+            <div class="card">
+                <h3>Selamat Datang di Panel Klien</h3>
+                <p class="subtitle">Kelola dan pantau seluruh aktivitas proyek digital UMKM Anda di sini.</p>
+                
+                <div style="background: var(--primary-light); padding: 20px; border-radius: 12px; border-left: 4px solid var(--primary);">
+                    <h4 style="margin: 0 0 6px 0; color: var(--primary); font-size: 15px;">💡 Info SafePay Escrow Aktif</h4>
+                    <p style="margin: 0; font-size: 13px; color: var(--text-main); line-height: 1.6;">
+                        Dana proyek Anda saat ini aman tersimpan dalam sistem bersama. Dana hanya akan dicairkan ke dompet freelancer setelah Anda melakukan persetujuan hasil kerja di halaman <b>Kurasi Karya</b>.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: TAWARAN FREELANCER -->
+        <div id="tawaran" class="tab-panel">
+            <div class="card">
+                <h3>Kotak Masuk Tawaran Pekerjaan</h3>
+                <p class="subtitle">Sistem mencocokkan proyek masuk dari klien berdasarkan kesesuaian anggaran *Rate Card* Anda.</p>
+                
+                <div class="project-grid">
+                    <!-- Item Proyek 1 -->
+                    <div class="project-card" id="proj-card-1">
+                        <div>
+                            <span style="background:#e0f2fe; color:#0369a1; font-size:11px; font-weight:600; padding:4px 8px; border-radius:6px;">UI/UX Web</span>
+                            <h4>Landing Page UMKM Batik</h4>
+                            <div class="project-meta">
+                                <div>💰 <b>Budget:</b> Rp2.000.000</div>
+                                <div style="color:var(--success);">📊 <b>Rate Card:</b> Sangat Sesuai</div>
+                            </div>
+                        </div>
+                        <button class="btn" onclick="ambilProyek('proj-card-1')">Ambil Proyek Ini</button>
+                    </div>
+
+                    <!-- Item Proyek 2 -->
+                    <div class="project-card" id="proj-card-2">
+                        <div>
+                            <span style="background:#fef3c7; color:#b45309; font-size:11px; font-weight:600; padding:4px 8px; border-radius:6px;">Desain Grafis</span>
+                            <h4>Banner & Feed Toko Kue</h4>
+                            <div class="project-meta">
+                                <div>💰 <b>Budget:</b> Rp750.000</div>
+                                <div style="color:var(--success);">📊 <b>Rate Card:</b> Sesuai</div>
+                            </div>
+                        </div>
+                        <button class="btn" onclick="ambilProyek('proj-card-2')">Ambil Proyek Ini</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: KURASI KARYA -->
+        <div id="kurasi" class="tab-panel">
+            <div class="card">
+                <h3>Pusat Kurasi Karya Digital</h3>
+                <p class="subtitle">Periksa kesesuaian berkas hasil karya yang dikirimkan oleh mitra freelancer Anda.</p>
+                
+                <div class="project-grid" id="kurasi-grid">
+                    <div class="project-card" id="karya-1">
+                        <div>
+                            <div class="work-preview" style="background: linear-gradient(135deg, #fed7aa, #f1f5f9);">
+                                Mockup_Logo_v3.png
+                            </div>
+                            <h4>Rebranding Logo Usaha Kuliner</h4>
+                            <div class="project-meta">
+                                <div>👤 <b>Freelancer:</b> Rian Pratama</div>
+                                <div>📅 <b>Dikirim:</b> Hari ini, 14:20 WIB</div>
+                            </div>
+                        </div>
+                        <button class="btn btn-success" onclick="setujuiKarya('karya-1')">✓ Setujui & Cairkan Dana</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: PROFIL & PORTOFOLIO -->
+        <div id="profil" class="tab-panel">
+            <div class="profile-container">
+                
+                <!-- KOLOM KIRI: INFO AKUN -->
+                <div class="card profile-sidebar">
+                    <div class="avatar-wrapper">
+                        <div class="avatar">👨‍💻</div>
+                        <div class="badge-verified">Verified</div>
+                    </div>
+                    <h3 style="margin: 0; font-size: 18px;">Rian Pratama</h3>
+                    <p style="margin: 4px 0 0 0; color: var(--text-muted); font-size: 13px;">Senior UI/UX & Brand Designer</p>
+                    
+                    <ul class="stats-list">
+                        <li><span>Kompetensi Utama</span><span>UI/UX Designer</span></li>
+                        <li><span>Reputasi Kerja</span><span>⭐ 4.9 / 5.0</span></li>
+                        <li><span>Total Penyelesaian</span><span>15 Proyek Selesai</span></li>
+                        <li><span>Saldo Dompet</span><span style="color: var(--success);" id="saldo-dompet">Rp4.500.000</span></li>
+                    </ul>
+                </div>
+
+                <!-- KOLOM KANAN: ETALASE PORTOFOLIO -->
+                <div class="card">
+                    <h3>Etalase Portofolio Hasil Karya</h3>
+                    <p class="subtitle">Riwayat galeri mahakarya digital asli buatan Anda yang siap dipamerkan ke calon klien.</p>
+                    
+                    <div class="portfolio-grid">
+                        <div class="portfolio-item">
+                            <div class="portfolio-thumb" style="background: linear-gradient(45deg, #3b82f6, #1d4ed8); color:#fff;">[ Preview Aplikasi ]</div>
+                            <div class="portfolio-desc">
+                                <h5>Fintech Mobile App</h5>
+                                <span>UI/UX Design</span>
+                            </div>
+                        </div>
+                        <div class="portfolio-item">
+                            <div class="portfolio-thumb" style="background: linear-gradient(45deg, #ec4899, #be185d); color:#fff;">[ Preview Branding ]</div>
+                            <div class="portfolio-desc">
+                                <h5>Visual Identity Kopi Jowo</h5>
+                                <span>Branding</span>
+                            </div>
+                        </div>
+                        <div class="portfolio-item">
+                            <div class="portfolio-thumb" style="background: linear-gradient(45deg, #10b981, #047857); color:#fff;">[ Preview Web ]</div>
+                            <div class="portfolio-desc">
+                                <h5>E-Commerce Marketplace</h5>
+                                <span>Web Development</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- LOGIKA JAVASCRIPT TAB & SIMULASI -->
+    <script>
+        // Fungsi Navigasi Tab Sistem
+        function openTab(tabId) {
+            // Nonaktifkan semua panel tab
+            const panels = document.querySelectorAll('.tab-panel');
+            panels.forEach(panel => panel.classList.remove('active'));
+
+            // Matikan status aktif di semua tombol nav
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            // Aktifkan tab target terpilih
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        // Simulasi Menyetujui Hasil Karya (Sisi Klien)
+        function setujuiKarya(cardId) {
+            const card = document.getElementById(cardId);
+            card.style.opacity = '0.5';
+            card.style.pointerEvents = 'none';
+            
+            // Tambahkan efek mutasi dinamis pada nominal saldo dompet secara visual
+            const saldoEl = document.getElementById('saldo-dompet');
+            saldoEl.innerText = "Rp5.000.000 (Bertambah!)";
+            saldoEl.style.color = "#10b981";
+
+            alert("Karya berhasil disetujui! Status SafePay selesai, dana otomatis dicairkan menuju saldo akun dompet freelancer.");
+            card.innerHTML = "<p style='color:var(--success); font-weight:600; text-align:center; padding: 40px 0;'>✓ Transaksi Selesai & Dana Cair</p>";
+        }
+
+        // Simulasi Mengambil Penawaran Masuk (Sisi Freelancer)
+        function ambilProyek(cardId) {
+            const card = document.getElementById(cardId);
+            alert("Selamat! Proyek berhasil Anda ambil. Silakan cek ruang kerja untuk memulai proses pengiriman aset digital.");
+            card.style.opacity = '0.5';
+            card.innerHTML = "<p style='color:var(--primary); font-weight:600; text-align:center; padding: 20px 0;'>⌛ Dalam Tahap Pengerjaan</p>";
+        }
+    </script>
+</body>
+</html>
